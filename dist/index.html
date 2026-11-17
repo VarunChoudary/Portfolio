@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Varun Kanneganti’s developer portfolio, featuring a FastAPI URL shortener on AWS and experience building Spring Boot APIs.">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#181818">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Varun Kanneganti | Developer portfolio">
+  <meta property="og:description" content="API development with Java and Spring Boot, plus a look at how I deployed a FastAPI app on AWS.">
+  <meta property="og:url" content="https://varun-kanneganti-portfolio.courageousball4.chatgpt.site/">
+  <meta property="og:image" content="https://varun-kanneganti-portfolio.courageousball4.chatgpt.site/social.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Varun Kanneganti, API development and AWS deployment">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://varun-kanneganti-portfolio.courageousball4.chatgpt.site/">
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="preload" href="fonts/geist-latin.woff" as="font" type="font/woff" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+  <title>Varun Kanneganti | Developer portfolio</title>
+  <script>
+    try {
+      const theme = localStorage.getItem("varun-portfolio-theme");
+      if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+    } catch {
+      // The default theme still works when storage is unavailable.
+    }
+  </script>
+  <script src="script.js" defer></script>
+</head>
+<body id="top">
+  <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <!-- Phosphor regular icons. See licenses/phosphor.txt. -->
+    <symbol id="icon-arrow-up-right" viewBox="0 0 256 256">
+      <path d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/>
+    </symbol>
+    <symbol id="icon-arrow-right" viewBox="0 0 256 256">
+      <path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/>
+    </symbol>
+    <symbol id="icon-sun" viewBox="0 0 256 256">
+      <path d="M120,40V16a8,8,0,0,1,16,0V40a8,8,0,0,1-16,0Zm72,88a64,64,0,1,1-64-64A64.07,64.07,0,0,1,192,128Zm-16,0a48,48,0,1,0-48,48A48.05,48.05,0,0,0,176,128ZM58.34,69.66A8,8,0,0,0,69.66,58.34l-16-16A8,8,0,0,0,42.34,53.66Zm0,116.68-16,16a8,8,0,0,0,11.32,11.32l16-16a8,8,0,0,0-11.32-11.32ZM192,72a8,8,0,0,0,5.66-2.34l16-16a8,8,0,0,0-11.32-11.32l-16,16A8,8,0,0,0,192,72Zm5.66,114.34a8,8,0,0,0-11.32,11.32l16,16a8,8,0,0,0,11.32-11.32ZM48,128a8,8,0,0,0-8-8H16a8,8,0,0,0,0,16H40A8,8,0,0,0,48,128Zm80,80a8,8,0,0,0-8,8v24a8,8,0,0,0,16,0V216A8,8,0,0,0,128,208Zm112-88H216a8,8,0,0,0,0,16h24a8,8,0,0,0,0-16Z"/>
+    </symbol>
+    <symbol id="icon-moon" viewBox="0 0 256 256">
+      <path d="M233.54,142.23a8,8,0,0,0-8-2,88.08,88.08,0,0,1-109.8-109.8,8,8,0,0,0-10-10,104.84,104.84,0,0,0-52.91,37A104,104,0,0,0,136,224a103.09,103.09,0,0,0,62.52-20.88,104.84,104.84,0,0,0,37-52.91A8,8,0,0,0,233.54,142.23ZM188.9,190.34A88,88,0,0,1,65.66,67.11a89,89,0,0,1,31.4-26A106,106,0,0,0,96,56,104.11,104.11,0,0,0,200,160a106,106,0,0,0,14.92-1.06A89,89,0,0,1,188.9,190.34Z"/>
+    </symbol>
+    <symbol id="icon-list" viewBox="0 0 256 256">
+      <path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"/>
+    </symbol>
+    <symbol id="icon-x" viewBox="0 0 256 256">
+      <path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"/>
+    </symbol>
+    <symbol id="icon-link-simple" viewBox="0 0 256 256">
+      <path d="M165.66,90.34a8,8,0,0,1,0,11.32l-64,64a8,8,0,0,1-11.32-11.32l64-64A8,8,0,0,1,165.66,90.34ZM215.6,40.4a56,56,0,0,0-79.2,0L106.34,70.45a8,8,0,0,0,11.32,11.32l30.06-30a40,40,0,0,1,56.57,56.56l-30.07,30.06a8,8,0,0,0,11.31,11.32L215.6,119.6a56,56,0,0,0,0-79.2ZM138.34,174.22l-30.06,30.06a40,40,0,1,1-56.56-56.57l30.05-30.05a8,8,0,0,0-11.32-11.32L40.4,136.4a56,56,0,0,0,79.2,79.2l30.06-30.07a8,8,0,0,0-11.32-11.31Z"/>
+    </symbol>
+    <symbol id="icon-code" viewBox="0 0 256 256">
+      <path d="M69.12,94.15,28.5,128l40.62,33.85a8,8,0,1,1-10.24,12.29l-48-40a8,8,0,0,1,0-12.29l48-40a8,8,0,0,1,10.24,12.3Zm176,27.7-48-40a8,8,0,1,0-10.24,12.3L227.5,128l-40.62,33.85a8,8,0,1,0,10.24,12.29l48-40a8,8,0,0,0,0-12.29ZM162.73,32.48a8,8,0,0,0-10.25,4.79l-64,176a8,8,0,0,0,4.79,10.26A8.14,8.14,0,0,0,96,224a8,8,0,0,0,7.52-5.27l64-176A8,8,0,0,0,162.73,32.48Z"/>
+    </symbol>
+    <symbol id="icon-cloud" viewBox="0 0 256 256">
+      <path d="M160,40A88.09,88.09,0,0,0,81.29,88.67,64,64,0,1,0,72,216h88a88,88,0,0,0,0-176Zm0,160H72a48,48,0,0,1,0-96c1.1,0,2.2,0,3.29.11A88,88,0,0,0,72,128a8,8,0,0,0,16,0,72,72,0,1,1,72,72Z"/>
+    </symbol>
+    <symbol id="icon-git-branch" viewBox="0 0 256 256">
+      <path d="M232,64a32,32,0,1,0-40,31v17a8,8,0,0,1-8,8H96a23.84,23.84,0,0,0-8,1.38V95a32,32,0,1,0-16,0v66a32,32,0,1,0,16,0V144a8,8,0,0,1,8-8h88a24,24,0,0,0,24-24V95A32.06,32.06,0,0,0,232,64ZM64,64A16,16,0,1,1,80,80,16,16,0,0,1,64,64ZM96,192a16,16,0,1,1-16-16A16,16,0,0,1,96,192ZM200,80a16,16,0,1,1,16-16A16,16,0,0,1,200,80Z"/>
+    </symbol>
+  </svg>
+
+  <a class="skip-link button-md" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="site-bar container">
+      <a class="brand" href="#top" aria-label="Varun Kanneganti, back to top">
+        <span class="monogram" aria-hidden="true">VK</span>
+        <span class="title-4">Varun Kanneganti</span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a class="title-4" href="#work">Work</a>
+        <a class="title-4" href="#experience">Experience</a>
+        <a class="title-4" href="#about">About</a>
+      </nav>
+
+      <div class="header-actions">
+        <a class="header-contact title-4" href="#contact">
+          Contact
+          <svg class="icon" aria-hidden="true"><use href="#icon-arrow-up-right"/></svg>
+        </a>
+        <button class="icon-button theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light theme" hidden>
+          <svg class="icon sun-icon" aria-hidden="true"><use href="#icon-sun"/></svg>
+          <svg class="icon moon-icon" aria-hidden="true"><use href="#icon-moon"/></svg>
+        </button>
+        <button class="icon-button menu-toggle" id="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="mobile-menu" hidden>
+          <svg class="icon open-icon" aria-hidden="true"><use href="#icon-list"/></svg>
+          <svg class="icon close-icon" aria-hidden="true"><use href="#icon-x"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="mobile-menu" id="mobile-menu" hidden>
+      <nav class="mobile-nav container" aria-label="Mobile navigation">
+        <a class="heading-5" href="#work">Work <svg class="icon" aria-hidden="true"><use href="#icon-arrow-right"/></svg></a>
+        <a class="heading-5" href="#experience">Experience <svg class="icon" aria-hidden="true"><use href="#icon-arrow-right"/></svg></a>
+        <a class="heading-5" href="#about">About <svg class="icon" aria-hidden="true"><use href="#icon-arrow-right"/></svg></a>
+        <a class="heading-5" href="#contact">Contact <svg class="icon" aria-hidden="true"><use href="#icon-arrow-right"/></svg></a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <section class="hero container" aria-labelledby="intro-title">
+      <div class="intro">
+        <h1 class="heading-1" id="intro-title">
+          <span>I build APIs and</span>
+          <span>deploy apps on AWS</span>
+        </h1>
+        <p class="hero-intro body-3">
+          I’m Varun Kanneganti, a Computer Science graduate with experience building Java and Spring Boot APIs and deploying web applications.
+        </p>
+        <a class="button button-md primary-button" href="#work">
+          View my AWS project
+          <svg class="icon" aria-hidden="true"><use href="#icon-arrow-right"/></svg>
+        </a>
+        <p class="hero-proof caption-2">Internships at <strong>Signitives</strong> and <strong>Arnisys LLC</strong></p>
+      </div>
+
+      <figure class="hero-figure">
+        <div class="figure-bar">
+          <span class="title-4"><svg class="icon" aria-hidden="true"><use href="#icon-cloud"/></svg> Deployment overview</span>
+          <span class="caption-2">AWS</span>
+        </div>
+        <div class="deployment-map" role="img" aria-label="A URL shortener deployment using FastAPI, CloudFront, and GitHub Actions">
+          <div class="map-canvas" aria-hidden="true">
+            <span class="map-ring ring-outer"></span>
+            <span class="map-ring ring-inner"></span>
+            <span class="map-axis axis-horizontal"></span>
+            <span class="map-axis axis-vertical"></span>
+            <span class="map-cross cross-top"></span>
+            <span class="map-cross cross-bottom"></span>
+            <span class="map-dot dot-left"></span>
+            <span class="map-dot dot-right"></span>
+            <span class="map-dot dot-top"></span>
+            <span class="map-link">
+              <svg class="icon"><use href="#icon-link-simple"/></svg>
+            </span>
+            <span class="map-label label-api title-4">
+              <svg class="icon"><use href="#icon-code"/></svg> FastAPI
+            </span>
+            <span class="map-label label-cloud title-4">
+              <svg class="icon"><use href="#icon-cloud"/></svg> CloudFront
+            </span>
+            <span class="map-label label-ci title-4">
+              <svg class="icon"><use href="#icon-git-branch"/></svg> GitHub Actions
+            </span>
+          </div>
+        </div>
+        <figcaption class="figure-caption caption-2">
+          <span class="caption-marker" aria-hidden="true"></span>
+          URL shortener on AWS
+        </figcaption>
+      </figure>
+    </section>
+
+    <section class="section-block container" id="work" tabindex="-1" aria-labelledby="work-title">
+      <div class="section-heading" data-reveal>
+        <h2 class="heading-2" id="work-title">Featured work</h2>
+      </div>
+      <article class="project-card" data-reveal aria-labelledby="project-title">
+        <div class="project-summary">
+          <h3 class="heading-3" id="project-title">URL shortener on AWS</h3>
+          <p class="body-3">
+            I deployed a FastAPI URL shortener on EC2, served its web interface through S3 and CloudFront, and automated web updates with GitHub Actions.
+          </p>
+          <dl class="project-facts">
+            <div>
+              <dt class="caption-1">My contribution</dt>
+              <dd class="body-2">AWS deployment and CI/CD</dd>
+            </div>
+            <div>
+              <dt class="caption-1">API testing</dt>
+              <dd class="body-2">Swagger UI</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="explorer" id="architecture">
+          <h4 class="title-1" id="architecture-title">Deployment architecture</h4>
+          <div class="explorer-tabs" aria-labelledby="architecture-title" hidden>
+            <button class="tab button-sm" type="button" id="tab-api" aria-controls="panel-api">API</button>
+            <button class="tab button-sm" type="button" id="tab-web" aria-controls="panel-web">Web delivery</button>
+            <button class="tab button-sm" type="button" id="tab-data" aria-controls="panel-data">Data &amp; auth</button>
+          </div>
+
+          <div class="explorer-panel" id="panel-api" data-panel>
+            <p class="visually-hidden">API request flow</p>
+            <ol class="service-list service-flow">
+              <li class="service-step">
+                <span class="title-3">Client</span>
+                <span class="caption-2">HTTP request</span>
+              </li>
+              <li class="service-step">
+                <span class="title-3">NGINX</span>
+                <span class="caption-2">Reverse proxy</span>
+              </li>
+              <li class="service-step">
+                <span class="title-3">FastAPI</span>
+                <span class="caption-2">On Amazon EC2</span>
+              </li>
+            </ol>
+            <p class="panel-note body-6">NGINX forwards requests to FastAPI on EC2. The FastAPI process runs as a systemd service.</p>
+          </div>
+
+          <div class="explorer-panel" id="panel-web" data-panel>
+            <p class="visually-hidden">Web request flow</p>
+            <ol class="service-list service-flow">
+              <li class="service-step">
+                <span class="title-3">Browser</span>
+                <span class="caption-2">HTTPS request</span>
+              </li>
+              <li class="service-step">
+                <span class="title-3">CloudFront</span>
+                <span class="caption-2">Content delivery</span>
+              </li>
+              <li class="service-step">
+                <span class="title-3">Amazon S3</span>
+                <span class="caption-2">Static files</span>
+              </li>
+            </ol>
+            <p class="panel-note body-6">Route 53 and ACM support a custom HTTPS domain. GitHub Actions publishes web updates to S3.</p>
+          </div>
+
+          <div class="explorer-panel" id="panel-data" data-panel>
+            <p class="visually-hidden">Data and authentication services</p>
+            <ul class="service-list">
+              <li class="service-step">
+                <span class="title-3">Cognito</span>
+                <span class="caption-2">User sign in</span>
+              </li>
+              <li class="service-step">
+                <span class="title-3">Amazon RDS</span>
+                <span class="caption-2">PostgreSQL</span>
+              </li>
+              <li class="service-step">
+                <span class="title-3">ElastiCache</span>
+                <span class="caption-2">Redis</span>
+              </li>
+            </ul>
+            <p class="panel-note body-6">Cognito handles authentication. PostgreSQL and Redis run on AWS managed services.</p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="statement container" aria-labelledby="statement-title">
+      <h2 class="statement-copy heading-2" id="statement-title">
+        <span class="visually-hidden">I like knowing what happens after the code ships</span>
+        <span class="statement-line" data-reveal-line aria-hidden="true">I like knowing what happens</span>
+        <span class="statement-line" data-reveal-line aria-hidden="true">after the code ships</span>
+      </h2>
+    </section>
+
+    <section class="section-block experience container" id="experience" tabindex="-1" aria-labelledby="experience-title">
+      <div class="section-heading" data-reveal>
+        <h2 class="heading-2" id="experience-title">Experience</h2>
+      </div>
+      <ol class="experience-list" data-reveal>
+        <li>
+          <article class="job">
+            <div class="job-company">
+              <h3 class="heading-5">Signitives</h3>
+              <p class="job-dates caption-2"><time datetime="2025-06">Jun 2025</time> to <time datetime="2025-12">Dec 2025</time></p>
+            </div>
+            <div class="job-details">
+              <p class="title-2">Product Intern</p>
+              <p class="body-3">Deployed FastAPI applications on EC2, set up deployments with GitHub Actions, and used application logs to investigate reliability issues.</p>
+              <p class="job-tools caption-1">FastAPI <span aria-hidden="true">/</span> AWS <span aria-hidden="true">/</span> GitHub Actions</p>
+            </div>
+          </article>
+        </li>
+        <li>
+          <article class="job">
+            <div class="job-company">
+              <h3 class="heading-5">Arnisys LLC</h3>
+              <p class="job-dates caption-2"><time datetime="2024-08">Aug 2024</time> to <time datetime="2025-02">Feb 2025</time></p>
+            </div>
+            <div class="job-details">
+              <p class="title-2">Java Intern</p>
+              <p class="body-3">Built and optimized Spring Boot REST APIs, tuned database queries in MariaDB and MongoDB, and wrote tests using JUnit and Mockito.</p>
+              <p class="job-tools caption-1">Java <span aria-hidden="true">/</span> Spring Boot <span aria-hidden="true">/</span> MongoDB <span aria-hidden="true">/</span> JUnit</p>
+            </div>
+          </article>
+        </li>
+      </ol>
+    </section>
+
+    <section class="section-block about container" id="about" tabindex="-1" aria-labelledby="about-title">
+      <div class="about-grid" data-reveal>
+        <div>
+          <h2 class="heading-2" id="about-title">About me</h2>
+          <p class="body-3">
+            At university, I ran Java and Spring Boot workshops at our tech fest and captained the basketball team. I also presented papers and software demos at events with other colleges.
+          </p>
+        </div>
+        <aside class="education-card" aria-labelledby="education-title">
+          <p class="caption-1">Education</p>
+          <h3 class="title-1" id="education-title">B.Tech in Computer Science and Engineering</h3>
+          <p class="body-6">Presidency University, Bengaluru</p>
+          <p class="caption-2"><time datetime="2020">2020</time> to <time datetime="2024">2024</time></p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="contact container" id="contact" tabindex="-1" aria-labelledby="contact-title">
+      <div class="contact-card" data-reveal>
+        <div>
+          <h2 class="heading-3" id="contact-title">Get in touch</h2>
+          <p class="body-3">Reach out about API development and cloud deployment roles.</p>
+        </div>
+        <a class="button button-md primary-button" href="mailto:reachtovarun4@gmail.com">
+          Email me
+          <svg class="icon" aria-hidden="true"><use href="#icon-arrow-up-right"/></svg>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer container">
+    <span class="title-4">Varun Kanneganti</span>
+    <div class="footer-links">
+      <a class="title-4" href="https://github.com/VarunChoudary">
+        GitHub <svg class="icon" aria-hidden="true"><use href="#icon-arrow-up-right"/></svg>
+      </a>
+      <a class="title-4" href="https://www.linkedin.com/in/varun-kanneganti-0672422b7/">
+        LinkedIn <svg class="icon" aria-hidden="true"><use href="#icon-arrow-up-right"/></svg>
+      </a>
+      <a class="title-4" href="#top">Back to top</a>
+    </div>
+  </footer>
+</body>
+</html>
