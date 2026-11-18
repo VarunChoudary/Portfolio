@@ -6,7 +6,7 @@ Open `dist/index.html` in your browser. The site uses plain HTML, CSS, and JavaS
 
 - Edit `dist/index.html` to update the bio, projects, experience, or contact links.
 - Edit `dist/styles.css` to change spacing, type, and the light and dark color roles.
-- Edit `dist/script.js` to change the theme switch, mobile navigation, architecture tabs, or scroll effects.
+- Edit `dist/script.js` to change the request trace, architecture tabs, theme switch, mobile navigation, or scroll effects.
 
 The section IDs are used by navigation links. When changing a section ID, update its corresponding links. If you host the portfolio at a different address, update the canonical URL and social metadata in `dist/index.html`. Remove the robots meta tag when you want a publicly hosted version to appear in search engines.
 

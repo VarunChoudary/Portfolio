@@ -76,6 +76,68 @@ function setupMobileNavigation() {
   button.hidden = false;
 }
 
+function setupRequestTrace(motionPreference) {
+  const figure = document.querySelector("#request-trace");
+  const plane = figure.querySelector(".trace-plane");
+  const signal = figure.querySelector(".trace-signal");
+  const button = figure.querySelector(".trace-replay");
+  const label = figure.querySelector("[data-replay-label]");
+  const status = figure.querySelector("[data-trace-status]");
+  const announcement = figure.querySelector("[data-trace-announcement]");
+
+  let run = 0;
+  let announce = false;
+
+  function showDestination() {
+    plane.dataset.state = "complete";
+    status.textContent = "Request reached FastAPI";
+    if (announce) announcement.textContent = "The request passed through NGINX and reached FastAPI on Amazon EC2.";
+  }
+
+  function play(manual = false) {
+    const currentRun = ++run;
+    announce = manual;
+    announcement.textContent = "";
+    plane.dataset.state = "ready";
+
+    if (motionPreference.matches) {
+      showDestination();
+      return;
+    }
+
+    status.textContent = "Request in transit";
+    // Let the previous CSS animation reset before restarting the route.
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      if (currentRun !== run) return;
+      if (motionPreference.matches) showDestination();
+      else plane.dataset.state = "playing";
+    }));
+  }
+
+  function updatePreference() {
+    label.textContent = motionPreference.matches ? "Show request path" : "Replay request";
+    if (motionPreference.matches && plane.dataset.state === "playing") showDestination();
+  }
+
+  button.hidden = false;
+  updatePreference();
+  button.addEventListener("click", () => play(true));
+  motionPreference.addEventListener("change", updatePreference);
+  signal.addEventListener("animationend", (event) => {
+    if (event.animationName === "request-travel" && plane.dataset.state === "playing") showDestination();
+  });
+
+  if (motionPreference.matches || !("IntersectionObserver" in window)) return;
+  const observer = new IntersectionObserver(([entry]) => {
+    if (!entry.isIntersecting) return;
+    observer.disconnect();
+    window.setTimeout(() => {
+      if (run === 0 && !motionPreference.matches && figure.getBoundingClientRect().bottom > 0) play();
+    }, 450);
+  }, { threshold: 0.45 });
+  observer.observe(figure);
+}
+
 function setupArchitectureTabs() {
   const tabList = document.querySelector(".explorer-tabs");
   const tabs = [...tabList.querySelectorAll("button")];
@@ -165,7 +227,7 @@ function setupScrollEffects(reducedMotion) {
     const height = window.innerHeight;
     if (revealed < words.length) {
       const top = statement.getBoundingClientRect().top;
-      const travel = Math.min(180, height * 0.32);
+      const travel = Math.min(280, height * 0.38);
       const fraction = Math.max(0, Math.min(1, (height * 0.89 - top) / travel));
       const target = Math.ceil(fraction * words.length);
       while (revealed < target) words[revealed++].classList.add("is-revealed");
@@ -201,6 +263,7 @@ function setupScrollEffects(reducedMotion) {
 setupTheme();
 setupMobileNavigation();
 setupArchitectureTabs();
-const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
-setupSectionReveals(reducedMotion);
-setupScrollEffects(reducedMotion);
+const motionPreference = matchMedia("(prefers-reduced-motion: reduce)");
+setupRequestTrace(motionPreference);
+setupSectionReveals(motionPreference.matches);
+setupScrollEffects(motionPreference.matches);
