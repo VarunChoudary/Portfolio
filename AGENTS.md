@@ -1,6 +1,6 @@
 # Portfolio updates
 
-After completing a portfolio update, commit it and push the updated source to the `main` branch of [VarunChoudary/Portfolio](https://github.com/VarunChoudary/Portfolio). This applies to portfolio updates made through ChatGPT Sites.
+After completing a portfolio update, commit it and push the updated source to the `main` branch of [VarunChoudary/Portfolio](https://github.com/VarunChoudary/Portfolio). This applies to portfolio updates made through ChatGPT Sites. Use a short, one-line commit message.
 
 Keep `dist/`, `README.md`, and this file in sync. Check the current GitHub branch head before writing and preserve any existing commits. Use the GitHub connector when the checkout has no GitHub CLI credentials. Verify the GitHub branch after pushing.
 

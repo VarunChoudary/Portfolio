@@ -87,14 +87,16 @@ function setupRequestTrace(motionPreference) {
 
   let run = 0;
   let announce = false;
+  let stopAutoplay;
 
   function showDestination() {
     plane.dataset.state = "complete";
-    status.textContent = "Request reached FastAPI";
+    status.textContent = "Reached FastAPI";
     if (announce) announcement.textContent = "The request passed through NGINX and reached FastAPI on Amazon EC2.";
   }
 
   function play(manual = false) {
+    stopAutoplay?.();
     const currentRun = ++run;
     announce = manual;
     announcement.textContent = "";
@@ -105,7 +107,7 @@ function setupRequestTrace(motionPreference) {
       return;
     }
 
-    status.textContent = "Request in transit";
+    status.textContent = "In transit";
     // Let the previous CSS animation reset before restarting the route.
     requestAnimationFrame(() => requestAnimationFrame(() => {
       if (currentRun !== run) return;
@@ -115,8 +117,13 @@ function setupRequestTrace(motionPreference) {
   }
 
   function updatePreference() {
-    label.textContent = motionPreference.matches ? "Show request path" : "Replay request";
-    if (motionPreference.matches && plane.dataset.state === "playing") showDestination();
+    const reduced = motionPreference.matches;
+    label.textContent = reduced ? "Show path" : "Replay";
+    button.setAttribute("aria-label", reduced ? "Show path" : "Replay request");
+    if (reduced) {
+      stopAutoplay?.();
+      if (plane.dataset.state === "playing") showDestination();
+    }
   }
 
   button.hidden = false;
@@ -128,14 +135,35 @@ function setupRequestTrace(motionPreference) {
   });
 
   if (motionPreference.matches || !("IntersectionObserver" in window)) return;
-  const observer = new IntersectionObserver(([entry]) => {
-    if (!entry.isIntersecting) return;
-    observer.disconnect();
-    window.setTimeout(() => {
-      if (run === 0 && !motionPreference.matches && figure.getBoundingClientRect().bottom > 0) play();
+  const visibleThreshold = 0.9;
+  let visible = false;
+  let autoplayTimer;
+
+  function scheduleAutoplay() {
+    window.clearTimeout(autoplayTimer);
+    if (run || !visible || document.hidden || motionPreference.matches) return;
+
+    autoplayTimer = window.setTimeout(() => {
+      if (!document.hidden && !motionPreference.matches) play();
     }, 450);
-  }, { threshold: 0.45 });
-  observer.observe(figure);
+  }
+
+  const observer = new IntersectionObserver(([entry]) => {
+    visible = entry.intersectionRatio >= visibleThreshold;
+    scheduleAutoplay();
+  }, {
+    threshold: visibleThreshold,
+    rootMargin: "-80px 0px 0px 0px",
+  });
+
+  stopAutoplay = () => {
+    window.clearTimeout(autoplayTimer);
+    observer.disconnect();
+    document.removeEventListener("visibilitychange", scheduleAutoplay);
+    stopAutoplay = undefined;
+  };
+  document.addEventListener("visibilitychange", scheduleAutoplay);
+  observer.observe(plane);
 }
 
 function setupArchitectureTabs() {
