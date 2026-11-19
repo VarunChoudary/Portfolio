@@ -277,6 +277,49 @@
             <p class="panel-note body-6">Cognito handles authentication. PostgreSQL and Redis run on AWS managed services.</p>
           </div>
         </div>
+        <details class="project-case-study" id="deployment-case-study">
+          <summary class="button-md">
+            Read the deployment case study
+            <span class="case-study-toggle" aria-hidden="true">+</span>
+          </summary>
+          <div class="case-study-body">
+            <div class="case-study-intro">
+              <h4 class="heading-5">Taking a URL shortener to AWS</h4>
+              <p class="body-3">
+                The application had a FastAPI API and a static web interface. My work covered hosting, HTTPS, authentication, managed data services, and automated web publishing.
+              </p>
+            </div>
+            <div class="case-study-content">
+              <section class="case-study-implementation" aria-labelledby="implementation-title">
+                <h5 class="title-1" id="implementation-title">What I implemented</h5>
+                <dl class="implementation-list">
+                  <div>
+                    <dt class="title-3">API hosting and process supervision</dt>
+                    <dd class="body-3">I deployed FastAPI on EC2, configured NGINX as the reverse proxy, and used systemd to supervise the API process.</dd>
+                  </div>
+                  <div>
+                    <dt class="title-3">Web delivery and updates</dt>
+                    <dd class="body-3">I hosted static files in S3, delivered them through CloudFront, and configured a custom HTTPS domain with Route 53 and ACM. GitHub Actions published web updates to S3.</dd>
+                  </div>
+                  <div>
+                    <dt class="title-3">Authentication and data services</dt>
+                    <dd class="body-3">I integrated Cognito for user authentication and configured PostgreSQL through RDS and Redis through ElastiCache.</dd>
+                  </div>
+                </dl>
+              </section>
+              <div class="case-study-notes">
+                <section aria-labelledby="configuration-title">
+                  <h5 class="title-1" id="configuration-title">How the pieces fit</h5>
+                  <p class="body-3">NGINX forwards incoming requests to FastAPI. The systemd service supervises the running API process. The web files follow their own delivery path through S3 and CloudFront.</p>
+                </section>
+                <section aria-labelledby="validation-title">
+                  <h5 class="title-1" id="validation-title">What I checked</h5>
+                  <p class="body-3">I tested the API through Swagger UI and checked application logs and EC2 system health during deployment.</p>
+                </section>
+              </div>
+            </div>
+          </div>
+        </details>
       </article>
     </section>
 

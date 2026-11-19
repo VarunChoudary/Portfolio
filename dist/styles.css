@@ -1033,6 +1033,84 @@ main > section[tabindex="-1"]:focus {
   color: var(--text-muted);
 }
 
+.project-case-study {
+  grid-column: 1 / -1;
+  padding: var(--space-300);
+  background: var(--surface-card);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-24);
+}
+
+.project-case-study summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-200);
+  min-height: 44px;
+  padding: var(--space-75) var(--space-100);
+  margin: calc(-1 * var(--space-100));
+  border-radius: var(--radius-12);
+  list-style: none;
+  cursor: pointer;
+  text-wrap: balance;
+}
+
+.project-case-study summary::-webkit-details-marker {
+  display: none;
+}
+
+.case-study-toggle {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: var(--space-300);
+  height: var(--space-300);
+  color: var(--text-accent);
+  transition: transform var(--motion-layout) var(--motion-curve);
+}
+
+.project-case-study[open] .case-study-toggle {
+  transform: rotate(45deg);
+}
+
+.project-case-study summary:active {
+  background: var(--surface-raised);
+}
+
+.case-study-body {
+  padding-top: var(--space-400);
+  animation: explorer-panel-in var(--motion-color) var(--motion-curve);
+}
+
+.case-study-intro {
+  max-width: var(--measure);
+}
+
+.case-study-intro p,
+.case-study-notes p,
+.implementation-list dd {
+  margin-top: var(--space-75);
+  color: var(--text-secondary);
+}
+
+.case-study-content {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  align-items: start;
+  gap: var(--space-600);
+  margin-top: var(--space-400);
+}
+
+.implementation-list,
+.case-study-notes {
+  display: grid;
+  gap: var(--space-300);
+}
+
+.implementation-list {
+  margin-top: var(--space-200);
+}
+
 .explorer {
   padding: var(--space-300);
   background: var(--surface-card);
@@ -1335,6 +1413,10 @@ main > section[tabindex="-1"]:focus {
 }
 
 @media (hover: hover) {
+  .project-case-study summary:hover {
+    background: var(--surface-raised);
+  }
+
   .hero-action .primary-button:hover .icon {
     transform: translateY(var(--space-50));
   }
@@ -1397,6 +1479,11 @@ main > section[tabindex="-1"]:focus {
 
   .trace-plane {
     height: 19rem;
+  }
+
+  .case-study-content {
+    grid-template-columns: 1fr;
+    gap: var(--space-300);
   }
 
   .project-card {
@@ -1505,7 +1592,8 @@ main > section[tabindex="-1"]:focus {
     right: calc(100% + var(--space-75));
   }
 
-  .explorer {
+  .explorer,
+  .project-case-study {
     padding: var(--space-200);
   }
 
